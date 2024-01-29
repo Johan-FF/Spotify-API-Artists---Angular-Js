@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './menu.component.html',
-  styleUrl: './menu.component.sass'
+  styleUrl: './menu.component.sass',
 })
-export class MenuComponent {
-
-}
+export class MenuComponent {}
