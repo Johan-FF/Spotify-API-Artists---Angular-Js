@@ -1,5 +1,22 @@
 <app-menu />
 <app-search />
-<app-card />
-<p>artists-viewer works!</p>
+
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Artists</mat-card-title>
+    <mat-card-subtitle>All</mat-card-subtitle>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile> <app-card /> </mat-grid-tile>
+      <mat-grid-tile> <app-card /> </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-paginator
+      [hidePageSize]="true"
+      [length]="2"
+      [pageSize]="2"
+      aria-label="Select page"
+    ></mat-paginator>
+  </mat-card-content>
+</mat-card>
+
 <app-favorites />

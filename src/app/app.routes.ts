@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'user/login',
+    title: 'Login',
+    loadComponent: () => import('./modules/user/login/login.component'),
+  },
+  {
     path: 'artists',
     title: 'Artists',
     loadComponent: () =>
@@ -21,12 +26,12 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/artists',
+    redirectTo: '/user/login',
     pathMatch: 'full',
   },
   {
     path: '*',
-    redirectTo: '/artists',
+    redirectTo: '/user/login',
     pathMatch: 'full',
   },
 ];
