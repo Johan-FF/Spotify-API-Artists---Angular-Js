@@ -1,42 +1,22 @@
-@if (type==='albums') {
 <mat-list-item>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <img mat-card-avatar [src]="album.image" />
-        <div matListItemTitle>{{ album.name }}</div>
+        <div matListItemTitle>{{ song.name }}</div>
       </mat-panel-title>
       <mat-panel-description>
-        <div matListItemLine>{{ album.releaseDate }}</div>
-        <div matListItemLine>Tracks: {{ album.totalSongs }}</div>
+        <div matListItemLine>Popularity</div>
+        <div matListItemLine>{{ song.popularity }}</div>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-card class="card">
       <mat-divider></mat-divider>
-      @defer (on viewport) {
-      <div class="center-h">
-        <img
-          mat-card-image
-          [width]="250"
-          [height]="250"
-          [src]="album.image"
-          [alt]="'Photo of album ' + album.name"
-        />
-      </div>
-      } @placeholder {
-      <mat-card class="album-card"> </mat-card>
-      } @loading {
-      <mat-card class="album-card">
-        <mat-spinner></mat-spinner>
-      </mat-card>
-      }
-      <mat-divider></mat-divider>
 
       <mat-card-content>
         <mat-card-subtitle class="center-h">Artists</mat-card-subtitle>
-        <mat-chip-set aria-label="Artists in album" class="center-h">
-          @for (artist of album.artists; track artist.id) {
+        <mat-chip-set aria-label="Artists in song" class="center-h">
+          @for (artist of song.artists; track artist.id) {
           <mat-chip>
             <div class="artist-chip">
               @defer{
@@ -61,16 +41,16 @@
         <mat-divider></mat-divider>
 
         <mat-card-subtitle class="center-h">Countrys</mat-card-subtitle>
-        <mat-chip-set
+        <!-- <mat-chip-set
           class="countrys-container"
-          aria-label="Market places of album"
+          aria-label="Market places of song"
         >
-          @for (acronym of album.availableMarkets; track $index) {
+          @for (acronym of song.availableMarkets; track $index) {
           <mat-chip>
             {{ acronym }}
           </mat-chip>
           }
-        </mat-chip-set>
+        </mat-chip-set> -->
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions align="end">
@@ -80,4 +60,3 @@
     </mat-card>
   </mat-expansion-panel>
 </mat-list-item>
-} @else if (type==='songs') { }

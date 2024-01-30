@@ -4,14 +4,29 @@
     <div mat-subheader>Albums</div>
     <mat-accordion>
       @for (album of albums; track album.id) {
-      <app-card [type]="type" [album]="album" />
+      <mat-list-item>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <img mat-card-avatar [src]="album.image" />
+              <div matListItemTitle>{{ album.name }}</div>
+            </mat-panel-title>
+            <mat-panel-description>
+              <div matListItemLine>{{ album.releaseDate }}</div>
+              <div matListItemLine>Tracks: {{ album.totalSongs }}</div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <app-album-card [album]="album" />
+        </mat-expansion-panel>
+      </mat-list-item>
       }
     </mat-accordion>
     } @else if (type==='songs') {
     <div mat-subheader>Songs</div>
     <mat-accordion>
       @for (song of songs; track song.id) {
-      <app-card [type]="type" [song]="song" />
+      <app-song-card />
       }
     </mat-accordion>
     }

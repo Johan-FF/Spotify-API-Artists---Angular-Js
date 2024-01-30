@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-import { CardComponent } from '../card/card.component';
+import { AlbumCardComponent } from '../album-card/album-card.component';
+import { SongCardComponent } from '../song-card/song-card.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { ArtistsService } from '../../../services/spotify-api/artists.service';
@@ -14,7 +15,13 @@ import { Song } from '../../../models/song';
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [MatCardModule, MatListModule, CardComponent, MatExpansionModule],
+  imports: [
+    MatCardModule,
+    MatListModule,
+    SongCardComponent,
+    MatExpansionModule,
+    AlbumCardComponent,
+  ],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.sass',
 })
