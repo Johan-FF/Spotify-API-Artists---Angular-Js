@@ -4,4 +4,6 @@ export const APP_CREDENTIALS = {
   CLIENT_STATE: '0b2205b2fc69143f',
 };
 
+export const TOKEN_IPINFO_API = '66cce62fb996c7';
+
 export const NAME_USER_STATE = 'USER_STATE';

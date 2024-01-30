@@ -1,1 +1,19 @@
-<p>card-list works!</p>
+<mat-card class="main-container">
+  <mat-list>
+    @if (type==='albums') {
+    <div mat-subheader>Albums</div>
+    <mat-accordion>
+      @for (album of albums; track album.id) {
+      <app-card [type]="type" [album]="album" />
+      }
+    </mat-accordion>
+    } @else if (type==='songs') {
+    <div mat-subheader>Songs</div>
+    <mat-accordion>
+      @for (song of songs; track song.id) {
+      <app-card [type]="type" [song]="song" />
+      }
+    </mat-accordion>
+    }
+  </mat-list>
+</mat-card>

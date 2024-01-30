@@ -8,7 +8,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (
     url === 'https://accounts.spotify.com/authorize?' ||
-    url === 'https://accounts.spotify.com/api/token'
+    url === 'https://accounts.spotify.com/api/token' ||
+    url === 'https://ipapi.co/json'
   ) {
     return next(req);
   }
