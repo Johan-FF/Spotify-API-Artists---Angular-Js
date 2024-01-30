@@ -5,12 +5,22 @@
   </mat-card-content>
   <mat-form-field class="form-field">
     <mat-label>Name</mat-label>
-    <input matInput type="text" [(ngModel)]="value" />
-    <button matPrefix mat-icon-button aria-label="Search" (click)="value = ''">
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="value"
+      (ngModelChange)="setSearch()"
+    />
+    <button matPrefix mat-icon-button aria-label="Search" (click)="setSearch()">
       <mat-icon>search</mat-icon>
     </button>
     @if (value) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
+    <button
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="clearSearch()"
+    >
       <mat-icon>close</mat-icon>
     </button>
     }

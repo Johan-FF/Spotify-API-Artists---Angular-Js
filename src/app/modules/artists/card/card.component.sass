@@ -1,6 +1,30 @@
 .card 
   max-width: 400px
+  background-color: var(--dark-primary)
 
-.header-image
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg')
-  background-size: cover
+.image-container
+  width: 100%
+  display: flex
+  justify-content: center
+
+mat-card-header
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+.artist-card
+  width: 250px
+  height: 250px
+  display: flex
+  justify-content: center
+  align-items: center
+
+mat-card-content
+  max-width: 240px
+
+mat-card-title
+  max-width: 120px
+  word-wrap: break-word
+
+.mat-chip
+  background-color: var(--dark-quaternary)

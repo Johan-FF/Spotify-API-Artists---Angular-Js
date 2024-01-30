@@ -1,23 +1,58 @@
 <mat-card class="card">
   <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    <span>
+      <mat-card-title>{{ artist.name }}</mat-card-title>
+      <mat-card-subtitle>Artist</mat-card-subtitle>
+    </span>
+
+    <mat-list>
+      <mat-list-item>
+        <span matListItemTitle>Popularity</span>
+        <span matListItemLine>{{ artist.popularity }}</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span matListItemTitle>Followers</span>
+        <span matListItemLine>{{ artist.followers }}</span>
+      </mat-list-item>
+    </mat-list>
   </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
+
+  @defer (on viewport) {
+  <div class="image-container">
+    <img
+      mat-card-image
+      [width]="250"
+      [height]="250"
+      [src]="artist.image"
+      [alt]="'Photo of ' + artist.name"
+    />
+  </div>
+  } @placeholder {
+  <mat-card class="artist-card"> </mat-card>
+  } @loading {
+  <mat-card class="artist-card">
+    <mat-spinner></mat-spinner>
+  </mat-card>
+  }
+
   <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan. A small, agile dog that copes very well with
-      mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
+    <mat-chip-set aria-label="Musical generes of artist">
+      @for (genere of artist.genres; track $index) {
+      <mat-chip class="mat-chip">{{ genere }}</mat-chip>
+      }
+    </mat-chip-set>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
+
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="redirectToEspecificArtist()"
+    >
+      VIEW
+    </button>
+    <button mat-raised-button color="primary" (click)="redirectToSpotify()">
+      SPOTIFY
+    </button>
   </mat-card-actions>
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,5 +21,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './search.component.sass',
 })
 export class SearchComponent {
-  value = '';
+  public value = '';
+  @Output() changeSearch: EventEmitter<string> = new EventEmitter<string>();
+
+  public setSearch() {
+    this.changeSearch.emit(this.value);
+  }
+
+  public clearSearch() {
+    this.value = '';
+    this.setSearch();
+  }
 }
