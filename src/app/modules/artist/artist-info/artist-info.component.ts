@@ -40,13 +40,23 @@ import { Artist } from '../../../models/artist';
   styleUrl: './artist-info.component.sass',
 })
 export default class ArtistInfoComponent {
+  public cols: string = '';
+  public rowHeight: string = '';
   public artist!: Artist;
   private id: string = '';
 
   constructor(
     private artistsService: ArtistsService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    if (window.innerWidth <= 768) {
+      this.cols = '1';
+      this.rowHeight = '1:2';
+    } else {
+      this.cols = '2';
+      this.rowHeight = '1:1';
+    }
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];

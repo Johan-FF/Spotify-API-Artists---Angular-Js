@@ -2,9 +2,34 @@
   flex: 1 1 auto
 
 mat-toolbar
-  position: sticky
+  display: flex
+  align-items: center
+  width: 100%
+  z-index: 10
+  position: fixed
   left: 0px
   top: 0px
+  height: auto
 
-mat-toolbar-row img
+mat-toolbar .max-width
+  width: 100%
+  max-width: 1287px
+
+mat-toolbar-row
+  display: flex
+  flex-direction: row
+
+mat-toolbar-row span, mat-toolbar-row div
+  display: flex
+  flex-direction: row
+  align-items: center
+
+mat-toolbar-row span img
   margin: 16px
+
+@media only screen and (max-width: 768px)
+  mat-toolbar-row
+    flex-direction: column
+  
+  mat-toolbar mat-toolbar-row
+    height: auto

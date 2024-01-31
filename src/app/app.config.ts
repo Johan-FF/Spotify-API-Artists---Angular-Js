@@ -7,6 +7,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
   provideHttpClient,
+  withFetch,
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimations(),
     importProvidersFrom(HttpClientModule),
-    provideHttpClient(withInterceptors([authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
   ],
 };

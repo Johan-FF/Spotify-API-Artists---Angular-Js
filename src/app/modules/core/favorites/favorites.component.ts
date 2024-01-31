@@ -32,8 +32,14 @@ import { Album } from '../../../models/album';
 export class FavoritesComponent {
   public songs: Song[] = [];
   public albums: Album[] = [];
+  public cols: string = '';
 
   constructor(private favoritesService: FavoritesService) {
+    if (window.innerWidth <= 768) {
+      this.cols = '1';
+    } else {
+      this.cols = '2';
+    }
     this.albums = this.favoritesService
       .getAllAlbums()
       .map((album) => ({ ...album }));

@@ -1,31 +1,39 @@
 <p>
   <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="redirectToArtists()">
-        <mat-icon>home</mat-icon>
-      </button>
-      <span>Musical Artists</span>
-      <span class="spacer"></span>
-      <img mat-card-avatar [src]="profileImg" />
-      <span>{{ name }}</span>
-      @if(hideMenu) {
-      <button mat-icon-button (click)="viewMenu()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      } @else {
-      <button mat-icon-button (click)="viewMenu()">
-        <mat-icon>clear</mat-icon>
-      </button>
-      }
-    </mat-toolbar-row>
+    <div class="max-width">
+      <mat-toolbar-row>
+        <span>
+          <button mat-icon-button (click)="redirectToArtists()">
+            <mat-icon>home</mat-icon>
+          </button>
+          <span>Musical Artists</span>
+        </span>
+        <span class="spacer"></span>
+        <span>
+          <img mat-card-avatar [src]="profileImg" />
+          <span>{{ name }}</span>
+          @if(hideMenu) {
+          <button mat-icon-button (click)="viewMenu()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          } @else {
+          <button mat-icon-button (click)="viewMenu()">
+            <mat-icon>clear</mat-icon>
+          </button>
+          }
+        </span>
+      </mat-toolbar-row>
 
-    @if(!hideMenu) {
-    <mat-toolbar-row>
-      <button mat-icon-button (click)="redirectToAlbums()">
-        <mat-icon>add</mat-icon>
-      </button>
-      <span>Albums</span>
-    </mat-toolbar-row>
-    }
+      @if(!hideMenu) {
+      <mat-toolbar-row>
+        <div>
+          <button mat-icon-button (click)="redirectToAlbums()">
+            <mat-icon>add</mat-icon>
+          </button>
+          <span>Albums</span>
+        </div>
+      </mat-toolbar-row>
+      }
+    </div>
   </mat-toolbar>
 </p>

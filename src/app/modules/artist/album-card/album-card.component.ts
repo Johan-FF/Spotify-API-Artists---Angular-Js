@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -32,11 +32,18 @@ import { FavoritesService } from '../../../services/user-preferences/favorites.s
 export class AlbumCardComponent {
   @Input() public album!: Album;
   @Input() public isInFavorites!: boolean;
+  public imageSize: number = 0;
 
   constructor(
     private router: Router,
     private favoritesService: FavoritesService
-  ) {}
+  ) {
+    if (window.innerWidth <= 768) {
+      this.imageSize = 150;
+    } else {
+      this.imageSize = 250;
+    }
+  }
 
   ngOnInit() {
     if (!this.isInFavorites) {

@@ -33,20 +33,27 @@ import { FavoritesService } from '../../../services/user-preferences/favorites.s
   styleUrl: './add-album.component.sass',
 })
 export default class AddAlbumComponent {
-  nameFormGroup = this.formBuilder.group({
+  public nameFormGroup = this.formBuilder.group({
     name: ['', Validators.required],
   });
-  yearFormGroup = this.formBuilder.group({
+  public yearFormGroup = this.formBuilder.group({
     year: ['', Validators.required],
   });
-  urlFormGroup = this.formBuilder.group({
+  public urlFormGroup = this.formBuilder.group({
     url: ['', [Validators.required, this.urlValidator]],
   });
+  public isInMobile: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private favoritesService: FavoritesService
-  ) {}
+  ) {
+    if (window.innerWidth <= 768) {
+      this.isInMobile = true;
+    } else {
+      this.isInMobile = false;
+    }
+  }
 
   public urlValidator(control: FormControl) {
     const urlPattern =

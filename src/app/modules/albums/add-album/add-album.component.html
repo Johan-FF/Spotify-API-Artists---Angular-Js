@@ -1,7 +1,8 @@
 <app-menu />
 
 <div class="form-container">
-  <mat-stepper linear #stepper>
+  @if(isInMobile) {
+  <mat-vertical-stepper #stepper>
     <mat-step [stepControl]="nameFormGroup" editable="true">
       <form [formGroup]="nameFormGroup">
         <ng-template matStepLabel>Fill out the name of album</ng-template>
@@ -66,7 +67,82 @@
       </form>
     </mat-step>
 
-    <mat-step>
+    <mat-step editable="false">
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="onSubmit()">Complete</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  } @else {
+  <mat-stepper #stepper>
+    <mat-step [stepControl]="nameFormGroup" editable="true">
+      <form [formGroup]="nameFormGroup">
+        <ng-template matStepLabel>Fill out the name of album</ng-template>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            maxlength="100"
+            matInput
+            #name
+            formControlName="name"
+            placeholder="Name of album"
+            required
+          />
+          <mat-hint align="end">{{ name.value.length }}/100</mat-hint>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="yearFormGroup" editable="true">
+      <form [formGroup]="yearFormGroup">
+        <ng-template matStepLabel>Fill out the year</ng-template>
+        <mat-form-field>
+          <mat-label>Year</mat-label>
+          <input
+            type="number"
+            max="2024"
+            min="1900"
+            matInput
+            formControlName="year"
+            placeholder="From 1900 to 2024"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="urlFormGroup" editable="true">
+      <form [formGroup]="urlFormGroup">
+        <ng-template matStepLabel>Fill out the url of image</ng-template>
+        <mat-form-field>
+          <mat-label>Image Url</mat-label>
+          <input
+            type="url"
+            matInput
+            formControlName="url"
+            placeholder="https://image.com"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step editable="false">
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
@@ -75,6 +151,7 @@
       </div>
     </mat-step>
   </mat-stepper>
+  }
 </div>
 
 <app-favorites />

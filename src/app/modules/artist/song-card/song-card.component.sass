@@ -13,6 +13,10 @@ mat-panel-description
 mat-expansion-panel-header
   min-height: calc(auto + 32px)
 
+.divider-in-mobile
+  width: 100%
+  display: flex
+
 mat-panel-title img
   margin-top: 16px
   margin-right: 16px
@@ -71,3 +75,14 @@ mat-divider
   &::-webkit-scrollbar-track
     background-color: var(--light-secondary)
     border-radius: 10% 
+
+@media only screen and (max-width: 768px)
+  mat-expansion-panel-header
+    height: auto
+  
+  .divider-in-mobile
+    flex-direction: column
+    height: auto
+  
+  mat-panel-description
+    align-items: center

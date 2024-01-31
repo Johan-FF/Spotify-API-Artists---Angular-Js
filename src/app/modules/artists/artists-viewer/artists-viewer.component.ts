@@ -29,6 +29,7 @@ import { Artist } from '../../../models/artist';
   styleUrl: './artists-viewer.component.sass',
 })
 export default class ArtistsViewerComponent {
+  public cols: string = '';
   public userSearch: string = 'Lo más escuchado';
   public limitSearch: number = 15;
   public pageIndex: number = 0;
@@ -36,7 +37,13 @@ export default class ArtistsViewerComponent {
   public lengthArtists: number = 15;
   public artists: Artist[] = [];
 
-  constructor(private artistsService: ArtistsService) {}
+  constructor(private artistsService: ArtistsService) {
+    if (window.innerWidth <= 768) {
+      this.cols = '1';
+    } else {
+      this.cols = '3';
+    }
+  }
 
   ngOnInit() {
     this.artistsService.setLimitSearch(this.limitSearch);

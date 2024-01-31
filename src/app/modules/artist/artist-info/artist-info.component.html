@@ -1,91 +1,96 @@
 <app-menu />
 
-<div class="main-container center-h">
-  <mat-grid-list cols="2" rowHeight="1:1">
-    <mat-grid-tile>
-      <mat-card class="example-card">
-        <mat-card-header class="center-h">
-          <mat-card-title class="center-h">{{ artist.name }}</mat-card-title>
-          <mat-card-subtitle class="center-h">Artist</mat-card-subtitle>
-        </mat-card-header>
+<div class="spacer">
+  <div class="main-container center-h">
+    <mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
+      <mat-grid-tile>
+        <mat-card class="example-card">
+          <mat-card-header class="center-h">
+            <mat-card-title class="center-h">{{ artist.name }}</mat-card-title>
+            <mat-card-subtitle class="center-h">Artist</mat-card-subtitle>
+          </mat-card-header>
 
-        <div class="image-container">
-          <img
-            mat-card-image
-            [width]="500"
-            [height]="500"
-            [src]="artist.image"
-            [alt]="'Photo of ' + artist.name"
-          />
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-      <mat-card class="main-card">
-        <mat-card-header class="container-followers">
-          <mat-progress-bar
-            color="primary"
-            mode="buffer"
-            [value]="getValueProgrssBar(artist.followers)"
-            bufferValue="0"
-          >
-          </mat-progress-bar>
-          <div class="cenetr-h">
-            <mat-card-title class="center-h">{{
-              artist.followers.toLocaleString()
-            }}</mat-card-title>
-            <mat-card-subtitle class="center-h">Followers</mat-card-subtitle>
+          <div class="image-container">
+            <img
+              mat-card-image
+              [width]="500"
+              [height]="500"
+              [src]="artist.image"
+              [alt]="'Photo of ' + artist.name"
+            />
           </div>
-        </mat-card-header>
+        </mat-card>
+      </mat-grid-tile>
 
-        <mat-card-content>
-          <div class="progress-spinner-container">
-            <mat-progress-spinner
+      <mat-grid-tile>
+        <mat-card class="main-card">
+          <mat-card-header class="container-followers">
+            <mat-progress-bar
               color="primary"
-              mode="determinate"
-              [value]="artist.popularity"
+              mode="buffer"
+              [value]="getValueProgrssBar(artist.followers)"
+              bufferValue="0"
             >
-            </mat-progress-spinner>
-            <p>
+            </mat-progress-bar>
+            <div class="cenetr-h">
               <mat-card-title class="center-h">{{
-                artist.popularity
+                artist.followers.toLocaleString()
               }}</mat-card-title>
-              <mat-card-subtitle class="center-h">Popularity</mat-card-subtitle>
-            </p>
-          </div>
-
-          <mat-chip-set aria-label="Musical genre of artist">
-            <div>
-              @for (genre of artist.genres; track $index) {
-              <mat-chip color="primary">{{ genre }}</mat-chip>
-              }
+              <mat-card-subtitle class="center-h">Followers</mat-card-subtitle>
             </div>
-          </mat-chip-set>
-        </mat-card-content>
+          </mat-card-header>
 
-        <mat-card-actions class="center-h">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="redirectToSpotify()"
-          >
-            SPOTIFY
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+          <mat-card-content>
+            <div class="progress-spinner-container">
+              <mat-progress-spinner
+                color="primary"
+                mode="determinate"
+                [value]="artist.popularity"
+              >
+              </mat-progress-spinner>
+              <p>
+                <mat-card-title class="center-h">{{
+                  artist.popularity
+                }}</mat-card-title>
+                <mat-card-subtitle class="center-h"
+                  >Popularity</mat-card-subtitle
+                >
+              </p>
+            </div>
+
+            <mat-chip-set aria-label="Musical genre of artist">
+              <div>
+                @for (genre of artist.genres; track $index) {
+                <mat-chip color="primary">{{ genre }}</mat-chip>
+                }
+              </div>
+            </mat-chip-set>
+          </mat-card-content>
+
+          <mat-card-actions class="center-h">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="redirectToSpotify()"
+            >
+              SPOTIFY
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div class="main-container center-h">
+    <mat-grid-list [cols]="cols" rowHeight="896px">
+      <mat-grid-tile>
+        <app-card-list type="albums" />
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <app-card-list type="songs" />
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 </div>
 
-<div class="main-container center-h">
-  <mat-grid-list cols="2" rowHeight="896px">
-    <mat-grid-tile>
-      <app-card-list type="albums" />
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-card-list type="songs" />
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
 <app-favorites />
