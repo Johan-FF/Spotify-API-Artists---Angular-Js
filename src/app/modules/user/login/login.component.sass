@@ -1,6 +1,80 @@
 .card 
   max-width: 400px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
 
-.header-image
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg')
-  background-size: cover
+.main-container
+  width: 100%
+  height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+
+.over
+  width: 800px
+  height: 450px
+  border-radius: 30px
+  margin-bottom: 20px
+  background: black
+  box-shadow: 15px 15px 30px #191919, -15px -15px 30px #3c3c3c
+  position: relative
+  display: flex
+  place-content: center
+  place-items: center
+  overflow: hidden
+
+  h1
+    z-index: 2
+    color: white
+    font-size: 8em
+    line-height: 1
+    text-align: center
+  
+  img
+    z-index: 2
+    width: 250px
+    height: 250px
+
+  &::before
+    content: ''
+    position: absolute
+    width: 130%
+    background-image: linear-gradient(180deg, #1db945, #1ed760)
+    height: 350px
+    animation: rotate 5s linear infinite
+    transition: all 1s linear
+
+  &::after
+    content: ''
+    position: absolute
+    background: black 
+    inset: 5px
+    border-radius: 15px
+
+@keyframes rotate
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+
+.main-container mat-spinner
+  transform: scale(3)
+
+@media only screen and (max-width: 425px)
+  .over
+    width: 280px
+    height: 500px
+    flex-direction: column
+
+    h1
+      font-size: 3em
+    
+    &::before
+      width: 220px
+      height: 130%
+  
+  .main-container mat-spinner
+    transform: scale(2)

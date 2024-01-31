@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAlbumComponent } from './add-album.component';
+import AddAlbumComponent from './add-album.component';
 
 describe('AddAlbumComponent', () => {
   let component: AddAlbumComponent;
@@ -8,10 +8,9 @@ describe('AddAlbumComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddAlbumComponent]
-    })
-    .compileComponents();
-    
+      imports: [AddAlbumComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AddAlbumComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

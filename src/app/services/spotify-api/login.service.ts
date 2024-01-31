@@ -2,7 +2,6 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { APP_CREDENTIALS } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +24,7 @@ export class LoginService {
     window.location.href = url + complement;
   }
 
-  public loadSpotifySettings(code: string, state: string): Observable<Object> {
+  public loadSpotifySettings(code: string, state: string) {
     const url = 'https://accounts.spotify.com/api/token';
     const CLIENT_SECRET = APP_CREDENTIALS.CLIENT_SECRET;
 
@@ -40,5 +39,10 @@ export class LoginService {
     });
 
     return this.http.post(url, body.toString(), { headers });
+  }
+
+  public getUser() {
+    const url = 'https://api.spotify.com/v1/me';
+    return this.http.get(url);
   }
 }
