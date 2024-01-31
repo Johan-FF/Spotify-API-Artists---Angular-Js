@@ -2,6 +2,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
+        <img mat-card-avatar [src]="song.album.image" />
         <div matListItemTitle>{{ song.name }}</div>
       </mat-panel-title>
       <mat-panel-description>
@@ -11,8 +12,20 @@
     </mat-expansion-panel-header>
 
     <mat-card class="card">
-      <mat-divider></mat-divider>
+      <mat-card-title class="center-h title-max">
+        {{ (song.songNumber + ". " + song.name).toString() }}
+      </mat-card-title>
+      <mat-card-subtitle class="center-h title-max">
+        {{ song.albumNumber + ". " + song.album.name }}
+      </mat-card-subtitle>
+      <mat-card-subtitle class="center-h">{{
+        "Duration: " + msToMinutesAndSeconds(song.duration)
+      }}</mat-card-subtitle>
 
+      <mat-divider></mat-divider>
+      <mat-card-subtitle class="center-h">Album</mat-card-subtitle>
+      <app-album-card [album]="song.album" />
+      <mat-divider></mat-divider>
       <mat-card-content>
         <mat-card-subtitle class="center-h">Artists</mat-card-subtitle>
         <mat-chip-set aria-label="Artists in song" class="center-h">
@@ -38,19 +51,6 @@
           </mat-chip>
           }
         </mat-chip-set>
-        <mat-divider></mat-divider>
-
-        <mat-card-subtitle class="center-h">Countrys</mat-card-subtitle>
-        <!-- <mat-chip-set
-          class="countrys-container"
-          aria-label="Market places of song"
-        >
-          @for (acronym of song.availableMarkets; track $index) {
-          <mat-chip>
-            {{ acronym }}
-          </mat-chip>
-          }
-        </mat-chip-set> -->
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions align="end">

@@ -107,7 +107,7 @@ export class CardListComponent {
               songNumber: song.track_number,
               duration: song.duration_ms,
               urlOpenOnSpotify: song.external_urls.spotify,
-              name: song.spotify,
+              name: song.name,
               popularity: song.popularity,
             });
           });
