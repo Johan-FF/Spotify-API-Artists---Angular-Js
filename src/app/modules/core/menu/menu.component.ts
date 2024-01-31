@@ -41,4 +41,8 @@ export class MenuComponent {
   public viewMenu() {
     this.hideMenu = !this.hideMenu;
   }
+
+  public logout() {
+    this.loginService.logout();
+  }
 }

@@ -11,6 +11,7 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { errorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,9 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimations(),
     importProvidersFrom(HttpClientModule),
-    provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
+    provideHttpClient(
+      withInterceptors([errorHandlerInterceptor, authInterceptor]),
+      withFetch()
+    ),
   ],
 };

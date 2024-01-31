@@ -1,16 +1,26 @@
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { APP_CREDENTIALS } from '../../../environments/environment';
+import {
+  APP_CREDENTIALS,
+  NAME_USER_STATE,
+} from '../../../environments/environment';
+import { CookieStorageService } from '../http/cookie.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private clientID = APP_CREDENTIALS.CLIENT_ID;
+  private clientSecret = APP_CREDENTIALS.CLIENT_SECRET;
   private redirectUri = 'http://localhost:4200/user/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieStorageService,
+    private router: Router
+  ) {}
 
   public login() {
     const url = 'https://accounts.spotify.com/authorize?';
@@ -26,7 +36,6 @@ export class LoginService {
 
   public loadSpotifySettings(code: string, state: string) {
     const url = 'https://accounts.spotify.com/api/token';
-    const CLIENT_SECRET = APP_CREDENTIALS.CLIENT_SECRET;
 
     const body = new HttpParams()
       .set('code', code)
@@ -35,10 +44,33 @@ export class LoginService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Basic ' + btoa(`${this.clientID}:${CLIENT_SECRET}`),
+      Authorization: 'Basic ' + btoa(`${this.clientID}:${this.clientSecret}`),
     });
 
     return this.http.post(url, body.toString(), { headers });
+  }
+
+  public refreshSpotifyToken() {
+    const url = 'https://accounts.spotify.com/api/token';
+    const data = this.cookieService.getCookie(NAME_USER_STATE);
+    const token = data ? JSON.parse(data) : '';
+
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', token.refresh_token)
+      .set('client_id', this.clientID);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: 'Basic ' + btoa(`${this.clientID}:${this.clientSecret}`),
+    });
+
+    return this.http.post(url, body.toString(), { headers });
+  }
+
+  public logout() {
+    this.cookieService.deleteCookie(NAME_USER_STATE);
+    this.router.navigate(['/user/login']);
   }
 
   public getUser() {

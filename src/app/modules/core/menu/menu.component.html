@@ -26,12 +26,18 @@
 
       @if(!hideMenu) {
       <mat-toolbar-row>
-        <div>
-          <button mat-icon-button (click)="redirectToAlbums()">
+        <span>
+          <button mat-icon-button (click)="redirectToArtists()">
             <mat-icon>add</mat-icon>
           </button>
           <span>Albums</span>
-        </div>
+        </span>
+        <span class="spacer"></span>
+        <span>
+          <button mat-icon-button (click)="logout()">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </span>
       </mat-toolbar-row>
       }
     </div>
