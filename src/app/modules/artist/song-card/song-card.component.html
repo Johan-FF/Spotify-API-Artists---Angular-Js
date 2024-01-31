@@ -24,7 +24,7 @@
 
       <mat-divider></mat-divider>
       <mat-card-subtitle class="center-h">Album</mat-card-subtitle>
-      <app-album-card [album]="song.album" />
+      <app-album-card [album]="song.album" [isInFavorites]="false" />
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-card-subtitle class="center-h">Artists</mat-card-subtitle>
@@ -41,10 +41,20 @@
               />
               }
               <div matListItemLine>{{ artist.name }}</div>
-              <button mat-mini-fab color="primary" class="size-25">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="size-25"
+                (click)="redirectToArtist(artist.id)"
+              >
                 <mat-icon>link</mat-icon>
               </button>
-              <button mat-mini-fab color="primary" class="size-25">
+              <button
+                mat-mini-fab
+                color="primary"
+                class="size-25"
+                (click)="redirectToSpotify(artist.urlOpenOnSpotify)"
+              >
                 <mat-icon>public</mat-icon>
               </button>
             </div>
@@ -54,8 +64,22 @@
       </mat-card-content>
       <mat-divider></mat-divider>
       <mat-card-actions align="end">
-        <button mat-raised-button color="primary">SPOTIFY</button>
-        <button mat-raised-button color="primary">FAVORITE</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="redirectToSpotify(song.urlOpenOnSpotify)"
+        >
+          SPOTIFY
+        </button>
+        @if(!isInFavorites){
+        <button mat-raised-button color="primary" (click)="handleFavorites()">
+          FAVORITE
+        </button>
+        } @else {
+        <button mat-stroked-button color="primary" (click)="handleFavorites()">
+          DISCARD
+        </button>
+        }
       </mat-card-actions>
     </mat-card>
   </mat-expansion-panel>

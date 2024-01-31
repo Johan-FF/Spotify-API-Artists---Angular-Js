@@ -65,7 +65,13 @@
         </mat-card-content>
 
         <mat-card-actions class="center-h">
-          <button mat-raised-button color="primary">SPOTIFY</button>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="redirectToSpotify()"
+          >
+            SPOTIFY
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuComponent } from '../../core/menu/menu.component';
 import { FavoritesComponent } from '../../core/favorites/favorites.component';
 import { CardListComponent } from '../card-list/card-list.component';
+
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -69,5 +70,9 @@ export default class ArtistInfoComponent {
     const maxFollowersInPlatform = 114580775;
     const relativeValue = (followers / maxFollowersInPlatform) * 100;
     return Math.min(100, Math.max(0, relativeValue));
+  }
+
+  public redirectToSpotify() {
+    window.open(this.artist.urlOpenOnSpotify, '_blank');
   }
 }

@@ -1,66 +1,38 @@
-<mat-card>
-  <mat-card-content>
-    <mat-card-title>Favorites</mat-card-title>
-    <mat-card-subtitle>Artists</mat-card-subtitle>
-    <mat-grid-list cols="2" rowHeight="2:1">
-      <mat-grid-tile>
-        <mat-card class="card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="descrption-fav">
-            <img
-              mat-card-lg-image
-              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-              alt="Photo of a Shiba Inu"
-            />
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct
-              spitz breeds of dog from Japan. A small, agile dog that copes very
-              well with mountainous terrain, the Shiba Inu was originally bred
-              for hunting.
-            </p>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <mat-card class="card">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content class="descrption-fav">
-            <img
-              mat-card-lg-image
-              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-              alt="Photo of a Shiba Inu"
-            />
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct
-              spitz breeds of dog from Japan. A small, agile dog that copes very
-              well with mountainous terrain, the Shiba Inu was originally bred
-              for hunting.
-            </p>
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-    <mat-paginator
-      [hidePageSize]="true"
-      [length]="2"
-      [pageSize]="2"
-      aria-label="Select page"
-    ></mat-paginator>
-  </mat-card-content>
-</mat-card>
+<p>
+  <mat-toolbar color="primary">
+    <div>
+      <mat-card-header>
+        <mat-card-title>Favorites</mat-card-title>
+        <mat-card-subtitle>Albums and Tracks</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="400px">
+          <mat-grid-tile>
+            <mat-card class="main-container">
+              <mat-list>
+                <div mat-subheader>Albums</div>
+                <mat-accordion>
+                  @for (album of albums; track album.id) {
+                  <app-album-card [album]="album" [isInFavorites]="true" />
+                  }
+                </mat-accordion>
+              </mat-list>
+            </mat-card>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-card class="main-container">
+              <mat-list>
+                <div mat-subheader>Songs</div>
+                <mat-accordion>
+                  @for (song of songs; track song.id) {
+                  <app-song-card [song]="song" [isInFavorites]="true" />
+                  }
+                </mat-accordion>
+              </mat-list>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </div>
+  </mat-toolbar>
+</p>

@@ -70,7 +70,6 @@ export class CardListComponent {
       this.artistsService
         .getSongsOfArtistByID(this.id)
         .subscribe((res: any) => {
-          console.log(res);
           res.tracks.map((song: any) => {
             this.songs.push({
               id: song.id,

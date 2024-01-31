@@ -4,14 +4,14 @@
     <div mat-subheader>Albums</div>
     <mat-accordion>
       @for (album of albums; track album.id) {
-      <app-album-card [album]="album" />
+      <app-album-card [album]="album" [isInFavorites]="false" />
       }
     </mat-accordion>
     } @else if (type==='songs') {
     <div mat-subheader>Songs</div>
     <mat-accordion>
       @for (song of songs; track song.id) {
-      <app-song-card [song]="song" />
+      <app-song-card [song]="song" [isInFavorites]="false" />
       }
     </mat-accordion>
     }

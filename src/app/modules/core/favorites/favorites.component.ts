@@ -1,24 +1,55 @@
 import { Component } from '@angular/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { AlbumCardComponent } from '../../artist/album-card/album-card.component';
+import { SongCardComponent } from '../../artist/song-card/song-card.component';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule, MatGridTile } from '@angular/material/grid-list';
+import { FavoritesService } from '../../../services/user-preferences/favorites.service';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+import { Song } from '../../../models/song';
+import { Album } from '../../../models/album';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
   imports: [
-    MatPaginatorModule,
+    MatToolbarModule,
     MatCardModule,
     MatGridListModule,
     MatGridTile,
-    MatButtonModule,
+    MatListModule,
+    MatExpansionModule,
+    AlbumCardComponent,
+    SongCardComponent,
   ],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.sass',
 })
 export class FavoritesComponent {
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
+  public songs: Song[] = [];
+  public albums: Album[] = [];
+
+  constructor(private favoritesService: FavoritesService) {
+    this.albums = this.favoritesService
+      .getAllAlbums()
+      .map((album) => ({ ...album }));
+    this.songs = this.favoritesService
+      .getAllSongs()
+      .map((song) => ({ ...song }));
+  }
+
+  ngOnInit() {
+    this.favoritesService
+      .subscribeToAlbums()
+      .subscribe((newAlbums: Album[]) => {
+        this.albums = newAlbums.map((album) => ({ ...album }));
+      });
+    this.favoritesService.subscribeToSongs().subscribe((newSongs: Song[]) => {
+      this.songs = newSongs.map((song) => ({ ...song }));
+    });
+  }
 }

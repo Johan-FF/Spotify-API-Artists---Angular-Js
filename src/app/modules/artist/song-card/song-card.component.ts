@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Song } from '../../../models/song';
+import { Router } from '@angular/router';
+import { FavoritesService } from '../../../services/user-preferences/favorites.service';
 
 @Component({
   selector: 'app-song-card',
@@ -29,16 +31,54 @@ import { Song } from '../../../models/song';
 })
 export class SongCardComponent {
   @Input() public song!: Song;
+  @Input() public isInFavorites!: boolean;
+
+  constructor(
+    private router: Router,
+    private favoritesService: FavoritesService
+  ) {}
+
+  ngOnInit() {
+    if (!this.isInFavorites) {
+      this.isInFavorites = this.favoritesService.isSongInList(this.song.id);
+      this.favoritesService.subscribeToSongs().subscribe((newSongs: Song[]) => {
+        this.isInFavorites = this.favoritesService.isSongInList(this.song.id);
+      });
+    }
+  }
 
   public msToMinutesAndSeconds(ms: number) {
     const second = Math.floor(ms / 1000);
     const minutes = Math.floor(second / 60);
-  
+
     const secondsRemaining = second % 60;
-  
+
     const minutesFormated = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    const secondsFormated = secondsRemaining < 10 ? `0${secondsRemaining}` : `${secondsRemaining}`;
-  
+    const secondsFormated =
+      secondsRemaining < 10 ? `0${secondsRemaining}` : `${secondsRemaining}`;
+
     return `${minutesFormated}:${secondsFormated}`;
+  }
+
+  public redirectToArtist(artistID: string) {
+    const url = `/artist/${artistID}`;
+
+    this.router.navigateByUrl(url).then(() => {
+      window.location.reload();
+    });
+  }
+
+  public redirectToSpotify(urlOnSpotify: string) {
+    window.open(urlOnSpotify, '_blank');
+  }
+
+  public handleFavorites() {
+    if (this.isInFavorites) {
+      this.favoritesService.deleteSong(this.song.id);
+      this.isInFavorites = false;
+    } else {
+      this.favoritesService.addSong(this.song);
+      this.isInFavorites = true;
+    }
   }
 }
