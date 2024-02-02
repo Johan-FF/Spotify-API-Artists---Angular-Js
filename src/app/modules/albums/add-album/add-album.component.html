@@ -77,7 +77,7 @@
     </mat-step>
   </mat-vertical-stepper>
   } @else {
-  <mat-stepper #stepper>
+  <mat-stepper linear #stepper>
     <mat-step [stepControl]="nameFormGroup" editable="true">
       <form [formGroup]="nameFormGroup">
         <ng-template matStepLabel>Fill out the name of album</ng-template>

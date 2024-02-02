@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(HttpClientModule),
     provideHttpClient(
-      withInterceptors([errorHandlerInterceptor, authInterceptor]),
+      withInterceptors([authInterceptor, errorHandlerInterceptor]),
       withFetch()
     ),
   ],
