@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.1.
 
+## Description
+
+This application works with the [Spotify API](https://developer.spotify.com/) and [Angular Material](https://material.angular.io/), you can create your own application in Spotify and configure your connection in environments/environment.ts and then check all the artists, if you select an artist you can see ten of their albums and songs; you can also create a fictitious album and add it to your favorites, just like the real albums and songs.
+
+![Spotify-Music-Artists-App-ezgif com-video-to-gif-converter](https://github.com/Johan-FF/Spotify-API-Artists---Angular-Js/assets/94552691/8161c6ad-46ff-4080-b8de-1ad577e9263e)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
